@@ -1,0 +1,25 @@
+import MapReduce
+import sys
+
+"""
+Dna trim + remove duplicates in MapReduce
+"""
+
+mr = MapReduce.MapReduce()
+
+# =============================
+# Do not modify above this line
+
+def mapper(record):
+    #emits trimmed dna as a key with no value
+    mr.emit_intermediate(record[1][0:-10], 0)
+
+def reducer(key, list_of_values):
+    #just returns trimmed key 
+    mr.emit(key)
+  
+# Do not modify below this line
+# =============================
+if __name__ == '__main__':
+  inputdata = open(sys.argv[1])
+  mr.execute(inputdata, mapper, reducer)
